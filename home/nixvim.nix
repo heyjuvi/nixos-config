@@ -8,7 +8,7 @@
     clipboard.providers.wl-copy.enable = true;
     colorschemes.catppuccin.enable = true;
 
-    options = {
+    opts = {
       number = true;         # Show line numbers
       relativenumber = true; # Show relative line numbers
       shiftwidth = 2;        # Tab width should be 2
@@ -21,8 +21,6 @@
       cursorline.enable = true;
       telescope.enable = true;
       which-key.enable = true;
-      cmp-nvim-lsp.enable = true;
-      cmp-nvim-lua.enable = true;
       noice.enable = true;
       notify.enable = true;
       luasnip.enable = true;
@@ -30,10 +28,6 @@
       crates-nvim.enable = true;
       fidget.enable = true;
       bufferline.enable = true;
-
-      telescope.extensions = {
-        file_browser.enable = true; 
-      };
 
       alpha = {
         enable = true;
@@ -72,41 +66,6 @@
         smartRename.enable = true;
         highlightCurrentScope.enable = true;
         navigation.enable = true;
-      };
-
-      nvim-cmp = {
-        enable = true;
-        autoEnableSources = true;
-        sources =
-          [
-            {name = "nvim_lsp";}
-            {name = "path";}
-            {name = "buffer";}
-            {name = "luasnip";}
-          ];
-
-        snippet.expand = "luasnip"; 
-
-        mapping = {
-          "<CR>" = "cmp.mapping.confirm({ select = true })";
-          "<Tab>" = {
-            action = ''
-              function(fallback)
-                local luasnip = require 'luasnip'
-                if cmp.visible() then
-                  cmp.select_next_item()
-                elseif luasnip.expandable() then
-                  luasnip.expand()
-                elseif luasnip.expand_or_jumpable() then
-                  luasnip.expand_or_jump()
-                else
-                  fallback()
-                end
-              end
-            '';
-            modes = [ "i" "s" ];
-          };
-        };
       };
     };
 
