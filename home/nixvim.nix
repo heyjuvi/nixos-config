@@ -55,7 +55,6 @@
 
           rust-analyzer = {
             enable = true;
-            installLanguageServer = false;
             installCargo = false;
             installRustc = false;
           };

@@ -16,6 +16,12 @@
       "flakes"
     ];
 
+  nix.settings.trusted-users =
+    [
+      "root"
+      "luna"
+    ];
+
   nixpkgs.config.allowUnfree = true;
 
   # Use the systemd-boot EFI boot loader.
@@ -146,8 +152,10 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    uwufetch
     wget
     wl-clipboard
+    ntfs3g
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

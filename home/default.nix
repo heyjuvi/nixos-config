@@ -15,12 +15,13 @@
    [
       firefox
       telegram-desktop
+      signal-desktop
       gcc
       cargo
       tree
       btop
       tofi
-      uwufetch
+      zathura
       tty-clock
       sway-contrib.grimshot
       nerdfonts
@@ -29,6 +30,7 @@
       brightnessctl
       discord
       inkscape
+      gimp
     ];
 
   programs.git = {
@@ -85,6 +87,16 @@
       };
     in
       chooseCursor "plan9";
+
+  xdg.mimeApps = {
+    enable = true;
+    associations.added = {
+      "application/pdf" = ["pwmt.zathura-cb.desktop"];
+    };
+    defaultApplications = {
+      "application/pdf" = ["pwmt.zathura-cb.desktop"];
+    };
+  };
 
   #home.sessionVariables.DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
 
