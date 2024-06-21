@@ -31,6 +31,7 @@
       discord
       inkscape
       gimp
+      kitty
     ];
 
   programs.git = {

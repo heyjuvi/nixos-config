@@ -94,7 +94,8 @@
 
       bind =
         [
-          "$mainMod SHIFT, return, exec, wezterm"
+          #"$mainMod SHIFT, return, exec, wezterm"
+          "$mainMod SHIFT, return, exec, kitty"
           "$mainMod SHIFT, U, exec, systemctl suspend; swaylock"
           "$mainMod SHIFT, Q, killactive,"
           "$mainMod SHIFT, X, exit,"
