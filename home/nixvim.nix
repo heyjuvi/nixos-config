@@ -45,7 +45,7 @@
           clangd.enable = true;
           tsserver.enable = true;
           eslint.enable = true;
-          nil_ls.enable = true;
+          nil-ls.enable = true;
 
           rust-analyzer = {
             enable = true;
@@ -57,7 +57,7 @@
 
       treesitter = {
         enable = true;
-        indent = true;
+        indent.enable = true;
         nixvimInjections = true;
       };
 
