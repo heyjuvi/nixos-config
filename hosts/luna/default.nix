@@ -97,12 +97,8 @@
 
   hardware.sane.enable = true; # enables support for SANE scanners
 
-  # Enable sound.
-  sound.enable = true;
-
   hardware.opengl = {
     enable = true;
-    driSupport = true;
     driSupport32Bit = true;
   };
 
