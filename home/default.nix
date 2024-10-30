@@ -8,7 +8,7 @@
       ./wezterm.nix
     ];
 
-  home.username = "luna";
+  home.username = "juvi";
   home.homeDirectory = "/home/${config.home.username}";
 
   home.packages = with pkgs;

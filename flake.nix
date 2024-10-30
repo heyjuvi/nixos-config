@@ -36,7 +36,7 @@
 	      home-manager.useGlobalPkgs = true;
 	      home-manager.useUserPackages = true;
 	      home-manager.extraSpecialArgs = inputs;
-	      home-manager.users.luna = { ... }: {
+	      home-manager.users.juvi = { ... }: {
 	        imports =
 		  [
 		    ./home
