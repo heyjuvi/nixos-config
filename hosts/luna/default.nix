@@ -29,6 +29,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.initrd.luks.devices = {
+    root = {
+      device = "/dev/disk/by-uuid/d53e920b-98ba-450d-9596-cc1e0910a95b";
+      preLVM = true;
+    };
+  };
+
   networking.hostName = "luna"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -93,9 +100,6 @@
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
   hardware.pulseaudio.enable = false;
 
   hardware.bluetooth = {
@@ -143,10 +147,13 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  # environment.systemPackages = with pkgs; [
-  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #   wget
-  # ];
+  environment.systemPackages = with pkgs; [
+    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    uwufetch
+    wget
+    wl-clipboard
+    ntfs3g
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

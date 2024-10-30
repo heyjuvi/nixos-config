@@ -6,7 +6,7 @@
     extraConfigLua = builtins.readFile ./config-files/nvim/init.lua; 
     
     clipboard.providers.wl-copy.enable = true;
-    colorschemes.catppuccin.enable = true;
+    #colorschemes.catppuccin.enable = true;
 
     opts = {
       number = true;         # Show line numbers
