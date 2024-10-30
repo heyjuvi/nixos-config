@@ -11,7 +11,20 @@
       ./hardware-configuration.nix
     ];
 
+  nix.settings.experimental-features =
+    [
+      "nix-command"
+      "flakes"
+    ];
+
+  nix.settings.trusted-users =
+    [
+      "root"
+      "juvi"
+    ];
+
   nixpkgs.config.allowUnfree = true;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -21,24 +34,56 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
+  services.avahi = {
+    enable = true;
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+    nssmdns4 = true;
+    nssmdns6 = true;
+
+    ipv4 = true;
+    ipv6 = true;
+
+    openFirewall = true;
+  };
 
   # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
+  i18n.defaultLocale = "en_GB.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    useXkbConfig = true; # use xkb.options in tty.
+  };
 
   # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-  
+  services.xserver = {
+    enable = false;
+    # Configure keymap in X11
+    xkb.layout = "de";
+    xkb.variant = "neo";
+    # xkb.options = "eurosign:e,caps:escape";
+  };
+
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome.totem
+    gnome.cheese
+    gnome.geary
+    gnome.gnome-contacts
+    gnome.gnome-weather
+    gnome.gnome-maps
+    gnome-photos
+    gnome.gnome-clocks
+    gnome.gnome-music
+    gnome-tour
+    gnome.yelp
+  ]);
+
+  # Printing
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint ];
+  };
+
+  hardware.sane.enable = true; # enables support for SANE scanners
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -51,28 +96,49 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound.
-  # hardware.pulseaudio.enable = true;
-  # OR
-  services.pipewire = {
+  hardware.pulseaudio.enable = false;
+
+  hardware.bluetooth = {
     enable = true;
-    pulse.enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        ControllerMode = "bredr";
+	Experimental = true;
+      };
+    };
   };
 
-  programs.dconf.enable = true;
+  services.blueman.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
+  security = {
+    polkit.enable = true;
+    rtkit.enable = true;
+    pam.services.swaylock = {
+      text = "auth include login";
+    };
+  };
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.juvi = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    hashedPassword = "$y$j9T$9waBeNWPf/JqV4kt6n1az/$zHjX5ic/gTIJfSwMKLvByUKDKel00vhyObSl0219bS6";
+    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       firefox
       neovim
       tree
     ];
+    shell = pkgs.zsh;
   };
 
   # List packages installed in system profile. To search, run:
@@ -89,6 +155,11 @@
     enable = true;
     enableSSHSupport = true;
   };
+
+  programs.dconf.enable = true;
+
+  # Activate zsh
+  programs.zsh.enable = true;
 
   # List services that you want to enable:
 
@@ -124,8 +195,5 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
-
-  nix.settings.experimental-features = ["flakes" "nix-command"];
-
 }
 

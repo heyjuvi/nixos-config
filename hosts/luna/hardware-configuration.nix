@@ -9,17 +9,17 @@
     ];
 
   boot.initrd.availableKernelModules = [ "ehci_pci" "ata_piix" "usb_storage" "sd_mod" "sr_mod" "sdhci_pci" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/3335bca5-7374-4165-a281-4deb14e4dd9c";
+    { device = "/dev/disk/by-uuid/0291295e-db41-4ad5-b365-d5e1fb524810";
       fsType = "btrfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/AF3B-4A8A";
+    { device = "/dev/disk/by-uuid/9907-51A9";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
