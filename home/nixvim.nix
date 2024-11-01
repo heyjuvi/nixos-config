@@ -25,7 +25,6 @@
       notify.enable = true;
       luasnip.enable = true;
       neo-tree.enable = true;
-      crates-nvim.enable = true;
       fidget.enable = true;
       bufferline.enable = true;
 
