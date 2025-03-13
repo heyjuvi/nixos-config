@@ -100,8 +100,6 @@
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
-  hardware.pulseaudio.enable = false;
-
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -144,6 +142,16 @@
     ];
     shell = pkgs.zsh;
   };
+
+  #virtualisation.virtualbox.host.enable = true;
+  #virtualisation.virtualbox.host.enableExtensionPack = true;
+  #virtualisation.virtualbox.guest.enable = true;
+  #virtualisation.virtualbox.guest.dragAndDrop = true;
+
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

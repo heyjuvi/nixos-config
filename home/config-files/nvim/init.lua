@@ -1,16 +1,3 @@
--- Switch between splits
-vim.keymap.set("n", "<C-Right>", "<c-w>l")
-vim.keymap.set("n", "<C-Left>", "<c-w>h")
-vim.keymap.set("n", "<C-Up>", "<c-w>k")
-vim.keymap.set("n", "<C-Down>", "<c-w>j")
-
--- Escape for exiting terminal mode
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
-
--- move selection linewise
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
-
 -- Neovide
 if vim.g.neovide then
 	vim.g.neovide_cursor_vfx_mode = "ripple"
@@ -20,9 +7,11 @@ if vim.g.neovide then
 
 	local font_name = "Hack Nerd Font Mono:h"
 	local font_size = 14
+
 	vim.o.guifont = font_name .. tostring(font_size)
 	vim.g.neovide_profiler = false
 	vim.g.neovide_hide_mouse_when_typing = true
+
 	-- Fullscreen keymapping
 	vim.keymap.set("n", "<leader>FF", function()
 		if vim.g.neovide_fullscreen then

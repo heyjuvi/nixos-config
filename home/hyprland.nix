@@ -19,7 +19,7 @@
 
       "$mainMod" = "SUPER";
 
-      exec-once = "swww init; swww img ~/.wallpapers/hyprland_default.png";
+      exec-once = "swww init; swww img ~/.wallpapers/guberniya.png";
 
       monitor = "eDP-1,1920x1080@60,0x0,1";
 
@@ -39,21 +39,25 @@
       general = {
         gaps_in = "5";
         gaps_out = "20";
-        border_size = "2";
+        border_size = "3";
 
-        "col.active_border" = "rgba(ff00abee) rgba(d500baee) 45deg";
+        "col.active_border" = "rgba(5bcefaee) rgba(f5a988ee) rgba(ffffffee) rgba(f5a988ee) rgba(5bcefaee) rgba(f5a988ee) rgba(ffffffee) rgba(f5a988ee) 45deg";
+        #"col.active_border" = "rgba(ff00abee) rgba(d500baee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
+	"bezier" = "linear, 0.0, 0.0, 1.0, 1.0";
+	"animation" = "borderangle, 1, 100, linear, loop";
 
         layout = "dwindle";
       };
 
       decoration = {
         rounding = "10";
-        drop_shadow = "yes";
-        shadow_range = "4";
-        shadow_render_power = "3";
 
-        "col.shadow" = "rgba(1a1a1aee)";
+	shadow = {
+          enabled = "yes";
+          range = "4";
+          render_power = "3";
+	};
 
         blur = {
           size = "4";
@@ -89,13 +93,12 @@
 
       windowrule =
         [
-          "float, ^(wezterm)$"
+          "float, ^(ghostty)$"
         ];
 
       bind =
         [
-          #"$mainMod SHIFT, return, exec, wezterm"
-          "$mainMod SHIFT, return, exec, kitty"
+          "$mainMod SHIFT, return, exec, ghostty"
           "$mainMod SHIFT, U, exec, systemctl suspend; swaylock"
           "$mainMod SHIFT, Q, killactive,"
           "$mainMod SHIFT, X, exit,"
@@ -161,7 +164,7 @@
     settings = {
       daemonize = true;
       ignore-empty-password = true;
-      image = "~/.wallpapers/hyprland_default_blurred.png";
+      image = "~/.wallpapers/guberniya_blurred.png";
       font = "Monoid Nerd Font";
       font-size = "60";
       bs-hl-color = "ffffff00";
