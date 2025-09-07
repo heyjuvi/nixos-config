@@ -5,7 +5,7 @@
     autosuggestion.enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
-    initExtra = ''
+    initContent = ''
       bindkey -e          # See https://unix.stackexchange.com/questions/5484/zle-i-cannot-find-why-ctrlr-does-not-work-for-non-root
       bindkey  "^[[1~"    beginning-of-line
       bindkey  "^[[4~"    end-of-line

@@ -1,4 +1,5 @@
 # Edit this configuration file to define what should be installed on
+
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
@@ -9,7 +10,10 @@
     [ # Include the results of the hardware scan.
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t420
       ./hardware-configuration.nix
+      inputs.niri.nixosModules.niri
     ];
+
+  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
 
   nix.settings.experimental-features =
     [
@@ -69,18 +73,21 @@
     # xkb.options = "eurosign:e,caps:escape";
   };
 
+  services.xserver.displayManager.gdm.wayland = true;
+  services.xserver.displayManager.defaultSession = "niri";
+  services.xserver.desktopManager.gnome.enable = true;
+
   environment.gnome.excludePackages = (with pkgs; [
-    gnome.totem
-    gnome.cheese
-    gnome.geary
-    gnome.gnome-contacts
-    gnome.gnome-weather
-    gnome.gnome-maps
-    gnome-photos
-    gnome.gnome-clocks
-    gnome.gnome-music
+    totem
+    cheese
+    geary
+    gnome-contacts
+    gnome-weather
+    gnome-maps
+    gnome-clocks
+    gnome-music
     gnome-tour
-    gnome.yelp
+    yelp
   ]);
 
   # Printing
@@ -134,7 +141,7 @@
   users.users.juvi = {
     isNormalUser = true;
     hashedPassword = "$y$j9T$9waBeNWPf/JqV4kt6n1az/$zHjX5ic/gTIJfSwMKLvByUKDKel00vhyObSl0219bS6";
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       firefox
       neovim
@@ -153,6 +160,8 @@
 
   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
+  virtualisation.docker.enable = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -161,6 +170,7 @@
     wget
     wl-clipboard
     ntfs3g
+    teamviewer
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

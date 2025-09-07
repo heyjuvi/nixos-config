@@ -4,7 +4,7 @@
     [
       ./shell.nix
       ./nixvim.nix
-      ./hyprland.nix
+      ./niri.nix
       ./ghostty.nix
     ];
 
@@ -13,6 +13,9 @@
 
   home.packages = with pkgs;
    [
+      niri
+      xwayland-satellite
+      swaybg
       firefox
       telegram-desktop
       signal-desktop
@@ -21,6 +24,7 @@
       tree
       btop
       tofi
+      rofi
       zathura
       tty-clock
       sway-contrib.grimshot
@@ -32,11 +36,15 @@
       remmina
       inkscape
       gimp
+      qemu
       prusa-slicer
       ghostty
       gnome-boxes
-      python312
-      python312Packages.pillow
+      dolphin-emu
+      eog
+      docker-compose
+      python311
+      python311Packages.pillow
       nerd-fonts._0xproto
       nerd-fonts._3270
       nerd-fonts.agave
@@ -86,7 +94,6 @@
       nerd-fonts.monofur
       nerd-fonts.monoid
       nerd-fonts.mononoki
-      nerd-fonts.mplus
       nerd-fonts.noto
       nerd-fonts.open-dyslexic
       nerd-fonts.overpass
