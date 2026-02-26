@@ -2,18 +2,14 @@
   description = "System nix flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     flake-utils.url = "github:numtide/flake-utils";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -26,7 +22,6 @@
     self,
     nixpkgs,
     home-manager,
-    nixvim,
     ...
   }@inputs: {
     nixosConfigurations = {
@@ -42,10 +37,9 @@
 	      home-manager.extraSpecialArgs = inputs;
 	      home-manager.users.juvi = { ... }: {
 	        imports =
-		  [
-		    ./home
-		    nixvim.homeManagerModules.nixvim
-		  ];
+	          [
+	            ./home
+	          ];
 	      };
 	    }
 	  ];

@@ -11,7 +11,7 @@
     settings = {
       daemonize = true;
       ignore-empty-password = true;
-      image = "~/.wallpapers/guberniya_blurred.png";
+      image = "${assets/wallpapers/musk-dont-worry-about-the-spheres-lock.png}";
       font = "Monoid Nerd Font";
       font-size = "60";
       bs-hl-color = "ffffff00";
@@ -24,7 +24,7 @@
       inside-wrong-color = "ffffff20";
       indicator-radius = "250";
       indicator-thickness = "3";
-      key-hl-color = "d500baee";
+      key-hl-color = "ff200880";
       layout-bg-color = "ffffff20";
       layout-border-color = "ffffff20";
       layout-text-color = "00000080";
@@ -56,7 +56,7 @@
         "browser" = { };
         "music" = { };
       };
-      animations.screenshot-ui-open = {
+      animations.screenshot-ui-open.kind = {
         easing = {
           curve = "ease-out-quad";
           duration-ms = 200;
@@ -119,9 +119,9 @@
         { command = [ "gnome-keyring-daemon" ]; }
 	{
           command = [
-            "swaybg"
+            "${lib.getExe pkgs.swaybg}"
             "-i"
-            "${assets/wallpapers/musk-heavy-metal.png}"
+            "${assets/wallpapers/musk-dont-worry-about-the-spheres.png}"
             "-m"
             "fill"
           ];
@@ -156,7 +156,7 @@
         focus-follows-mouse.enable = true;
 	keyboard = {
 	  xkb = {
-	   layout = "de";
+	    layout = "de";
 	    variant = "neo";
 	  };
 	};
@@ -260,10 +260,10 @@
           "Mod+Comma".action = actions.consume-or-expel-window-left;
           "Mod+Period".action = actions.consume-or-expel-window-right;
 
-          "Print".action = actions.screenshot;
-          "Mod+Shift+I".action = actions.screenshot-window {
-            write-to-disk = true;
-          };
+          #"Print".action = actions.screenshot;
+          #"Mod+Shift+I".action = actions.screenshot-window {
+          #  write-to-disk = true;
+          #};
           XF86AudioRaiseVolume = {
             action.spawn = [
               "wpctl"

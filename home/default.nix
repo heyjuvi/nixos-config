@@ -3,7 +3,6 @@
   imports =
     [
       ./shell.nix
-      ./nixvim.nix
       ./niri.nix
       ./ghostty.nix
     ];
@@ -21,9 +20,10 @@
       signal-desktop
       gcc
       cargo
+      glslang
+      vscode-fhs
       tree
       btop
-      tofi
       rofi
       zathura
       tty-clock
@@ -33,7 +33,6 @@
       swww
       brightnessctl
       discord
-      remmina
       inkscape
       gimp
       qemu
@@ -112,12 +111,28 @@
       nerd-fonts.ubuntu-sans
       nerd-fonts.victor-mono
       nerd-fonts.zed-mono
+      libiconv
+      pkg-config
+      openssl
+      libv4l
+      v4l-utils
+      glib
+      ffmpeg
+      libGL
+      libGLU
+      libxkbcommon
+      rustc
+      clippy
+      cargo
+      cargo-watch
+      rustPlatform.rustcSrc
+      rust-analyzer
     ];
 
   programs.git = {
     enable = true;
-    userName = "misterdanb";
-    userEmail = "danb@ha.si";
+    userName = "linn";
+    userEmail = "linn@ha.si";
 
     aliases = {
       alias = "!git config --get-regexp alias | sed 's/alias\\.\\([^ ]*\\) /\\1 := /'";
@@ -150,7 +165,6 @@
         accents = [ "pink" ];
         size = "compact";
         tweaks = [ "rimless" ];
-        variant = "mocha";
       };
     };
   };

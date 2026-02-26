@@ -40,6 +40,12 @@
     };
   };
 
+  boot.plymouth = {
+    enable = true;
+    themePackages = [ pkgs.plymouth-blahaj-theme ];
+    theme = "blahaj";
+  };
+
   networking.hostName = "luna"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -73,22 +79,7 @@
     # xkb.options = "eurosign:e,caps:escape";
   };
 
-  services.xserver.displayManager.gdm.wayland = true;
-  services.xserver.displayManager.defaultSession = "niri";
-  services.xserver.desktopManager.gnome.enable = true;
-
-  environment.gnome.excludePackages = (with pkgs; [
-    totem
-    cheese
-    geary
-    gnome-contacts
-    gnome-weather
-    gnome-maps
-    gnome-clocks
-    gnome-music
-    gnome-tour
-    yelp
-  ]);
+  services.displayManager.defaultSession = "niri";
 
   # Printing
   services.printing = {
@@ -168,9 +159,9 @@
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     uwufetch
     wget
+    sshfs
     wl-clipboard
     ntfs3g
-    teamviewer
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -185,6 +176,9 @@
 
   # Activate zsh
   programs.zsh.enable = true;
+
+  # Nix ld
+  programs.nix-ld.enable = true;
 
   # List services that you want to enable:
 
