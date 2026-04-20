@@ -38,12 +38,16 @@
       qemu
       prusa-slicer
       ghostty
+      alacritty
+      remmina
       gnome-boxes
+      gnome-terminal
       dolphin-emu
       eog
       docker-compose
       python311
       python311Packages.pillow
+      tailscale
       nerd-fonts._0xproto
       nerd-fonts._3270
       nerd-fonts.agave

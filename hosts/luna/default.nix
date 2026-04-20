@@ -87,6 +87,10 @@
     drivers = [ pkgs.gutenprint ];
   };
 
+  services.tailscale = {
+    enable = true;
+  };
+
   hardware.sane.enable = true; # enables support for SANE scanners
 
   hardware.graphics = {
@@ -149,7 +153,14 @@
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
+  programs.wireshark = {
+    enable = true;
+    dumpcap.enable = true;
+    usbmon.enable = true;
+  };
+
   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  users.extraGroups.wireshark.members = [ "juvi" ];
 
   virtualisation.docker.enable = true;
 
@@ -162,6 +173,7 @@
     sshfs
     wl-clipboard
     ntfs3g
+    wireshark
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

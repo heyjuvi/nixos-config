@@ -224,7 +224,7 @@
         in
         {
           "Mod+Shift+X".action.quit.skip-confirmation = false;
-          "Mod+Return".action.spawn = "ghostty";
+          "Mod+Return".action.spawn = "gnome-terminal";
           "Mod+Backspace".action = actions.spawn "rofi" "-show" "drun";
           "Mod+Shift+Backspace".action = actions.spawn "rofi" "-show" "run";
           "Mod+Shift+Q".action = actions.close-window;
