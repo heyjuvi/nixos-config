@@ -9,19 +9,29 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
+      #url = "github:nix-community/home-manager/master";
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     niri = {
-      url = "github:sodiboo/niri-flake";
+      url = "github:sodiboo/niri-flake/very-refactor";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+    niri-pkgs = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
+    nix-index-database,
     ...
   }@inputs: {
     nixosConfigurations = {
@@ -34,11 +44,12 @@
 	    home-manager.nixosModules.home-manager {
 	      home-manager.useGlobalPkgs = true;
 	      home-manager.useUserPackages = true;
-	      home-manager.extraSpecialArgs = inputs;
+	      home-manager.extraSpecialArgs = { inherit inputs; };
 	      home-manager.users.juvi = { ... }: {
 	        imports =
 	          [
 	            ./home
+		    nix-index-database.homeModules.default
 	          ];
 	      };
 	    }

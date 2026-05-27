@@ -49,12 +49,12 @@
   };
 
   programs.niri = {
+    package = inputs.niri-pkgs.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
     settings = {
       workspaces = {
+        "browser" = { };
         "chat" = { };
         "term" = { };
-        "browser" = { };
-        "music" = { };
       };
       animations.screenshot-ui-open.kind = {
         easing = {
@@ -71,10 +71,10 @@
       window-rules = [
         {
           geometry-corner-radius = {
-            bottom-left = 5.0;
-            bottom-right = 5.0;
-            top-left = 5.0;
-            top-right = 5.0;
+            bottom-left = 16.0;
+            bottom-right = 16.0;
+            top-left = 16.0;
+            top-right = 16.0;
           };
           clip-to-geometry = true;
         }
@@ -84,10 +84,6 @@
         }
         {
           matches = [ { app-id = "^Element$"; } ];
-          open-on-workspace = "chat";
-        }
-        {
-          matches = [ { app-id = "^$nheko"; } ];
           open-on-workspace = "chat";
         }
         {
@@ -103,16 +99,16 @@
           open-on-workspace = "browser";
         }
         {
-          matches = [ { app-id = "^floorp$"; } ];
-          open-on-workspace = "browser";
-        }
-        {
-          matches = [ { app-id = "^ghostty$"; } ];
+          matches = [ { app-id = "^kitty$"; } ];
           open-on-workspace = "term";
         }
         {
-          matches = [ { app-id = "^spotify$"; } ];
-          open-on-workspace = "music";
+          matches = [ { app-id = "^kitty$"; is-focused = true; } ];
+          opacity = 1.0;
+        }
+        {
+          matches = [ { app-id = "^kitty$"; is-focused = false; } ];
+          opacity = 0.7;
         }
       ];
       spawn-at-startup = [
@@ -166,7 +162,7 @@
         background-color = "transparent";
         border = {
           enable = true;
-          width = 4;
+          width = 0;
           active.gradient = {
             angle = 45;
             from = "oklch(0.8025 0.1203 226.51)";
@@ -224,7 +220,7 @@
         in
         {
           "Mod+Shift+X".action.quit.skip-confirmation = false;
-          "Mod+Return".action.spawn = "gnome-terminal";
+          "Mod+Return".action.spawn = "kitty";
           "Mod+Backspace".action = actions.spawn "rofi" "-show" "drun";
           "Mod+Shift+Backspace".action = actions.spawn "rofi" "-show" "run";
           "Mod+Shift+Q".action = actions.close-window;
@@ -237,10 +233,9 @@
           "Mod+Delete".action.spawn = "swaylock";
           "Mod+Shift+Slash".action = actions.show-hotkey-overlay;
 
+          "Mod+1".action = actions.focus-workspace "browser";
           "Mod+2".action = actions.focus-workspace "chat";
           "Mod+3".action = actions.focus-workspace "term";
-          "Mod+4".action = actions.focus-workspace "browser";
-          "Mod+8".action = actions.focus-workspace "music";
 
           "Mod+S".action = actions.focus-column-left;
           "Mod+T".action = actions.focus-column-right;
@@ -320,5 +315,30 @@
         };
     };
   };
+
+  #xdg.configFile.niri-config.source = let
+  #    inherit (inputs.niri.lib.internal) validated-config-for;
+  #    inherit (config.programs.niri) finalConfig;
+  #    package = inputs.niri-pkgs.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
+  #  in
+  #    lib.mkForce (
+  #      validated-config-for pkgs package ''
+  #        ${finalConfig}
+  #  
+  #        window-rule {
+  #          background-effect {
+  #            blur true
+  #            xray false
+  #          }
+  #        }
+  #  
+  #        layer-rule {
+  #          match namespace="^kitty$"
+  #          background-effect {
+  #            xray false
+  #          }
+  #        }
+  #      ''
+  #    );
 }
 

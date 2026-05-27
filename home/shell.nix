@@ -1,9 +1,7 @@
-{ config, pkgs, ... }:
-{
-  imports =
-    [
-      ./zsh.nix
-    ];
+{ config, pkgs, ... }: {
+
+  imports = [
+  ];
 
   # Shell
   programs.bash.enable = true;
@@ -21,16 +19,48 @@
     };
   };
 
-  # History / Search
-  programs.atuin = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
-
   # Commandline Tools
   programs.htop.enable = true;
   programs.bat.enable = true;
   programs.eza.enable = true;
-}
 
+  programs.kitty = {
+    enable = true;
+    shellIntegration = {
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      enableFishIntegration = true;
+    };
+    font = {
+      name = "Maple Mono";
+      size = 12.0;
+    };
+    settings = {
+      bold_font        = "auto";
+      italic_font      = "auto";
+      bold_italic_font = "auto";
+      scrollback_lines = 10000;
+      enable_audio_bell = false;
+      update_check_interval = 0;
+      tab_bar_edge = "bottom";
+      tab_bar_style = "slant";
+      hide_window_decorations = true;
+      window_margin_width = 10;
+      background_opacity = "0.8";
+      background_blur = 1;
+      notify_on_cmd_finish = "invisible";
+      cursor_trail = 1;
+    };
+  };
+
+  programs.zsh = {
+    enable = true;
+    initExtra = ''
+      eval "$(starship init zsh)"
+    '';
+  };
+
+  programs.zsh.shellAliases = {
+    ssh = "kitten ssh";
+  };
+}

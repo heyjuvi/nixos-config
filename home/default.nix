@@ -4,7 +4,6 @@
     [
       ./shell.nix
       ./niri.nix
-      ./ghostty.nix
     ];
 
   home.username = "juvi";
@@ -18,6 +17,7 @@
       firefox
       telegram-desktop
       signal-desktop
+      element-desktop
       gcc
       cargo
       glslang
@@ -37,11 +37,8 @@
       gimp
       qemu
       prusa-slicer
-      ghostty
-      alacritty
       remmina
       gnome-boxes
-      gnome-terminal
       dolphin-emu
       eog
       docker-compose
@@ -115,6 +112,7 @@
       nerd-fonts.ubuntu-sans
       nerd-fonts.victor-mono
       nerd-fonts.zed-mono
+      maple-mono.variable
       libiconv
       pkg-config
       openssl
@@ -186,16 +184,6 @@
       };
     in
       chooseCursor "plan9";
-
-  xdg.mimeApps = {
-    enable = true;
-    associations.added = {
-      "application/pdf" = ["pwmt.zathura-cb.desktop"];
-    };
-    defaultApplications = {
-      "application/pdf" = ["pwmt.zathura-cb.desktop"];
-    };
-  };
 
   #home.sessionVariables.DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
 
