@@ -47,7 +47,7 @@
       hide_window_decorations = true;
       window_margin_width = 10;
       background_opacity = "0.8";
-      background_blur = 1;
+      background_blur = 0;
       notify_on_cmd_finish = "invisible";
       cursor_trail = 1;
     };

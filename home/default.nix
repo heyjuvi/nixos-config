@@ -8,7 +8,7 @@
 
   home.username = "juvi";
   home.homeDirectory = "/home/${config.home.username}";
-
+  
   home.packages = with pkgs;
    [
       niri
@@ -39,7 +39,6 @@
       prusa-slicer
       remmina
       gnome-boxes
-      dolphin-emu
       eog
       docker-compose
       python311
@@ -151,6 +150,13 @@
   };
 
   programs.home-manager.enable = true;
+
+  home.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    QT_QPA_PLATFORM = "wayland";
+    NIXOS_OZONE_WL = "1";
+  };
 
   dconf.enable = true;
   dconf.settings = {

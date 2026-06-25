@@ -164,6 +164,10 @@
 
   virtualisation.docker.enable = true;
 
+  #environment.sessionVariables = {
+  #  MESA_LOADER_DRIVER_OVERRIDE = "i965";
+  #};
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [

@@ -3,25 +3,26 @@
 
   inputs = {
     #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     flake-utils.url = "github:numtide/flake-utils";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
       #url = "github:nix-community/home-manager/master";
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     niri = {
-      url = "github:sodiboo/niri-flake/very-refactor";
+      #url = "github:sodiboo/niri-flake/very-refactor";
+      url = "github:epireyn/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri-pkgs = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #niri-pkgs = {
+    #  url = "github:sodiboo/niri-flake";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
