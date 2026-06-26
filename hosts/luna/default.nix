@@ -145,10 +145,21 @@
     shell = pkgs.zsh;
   };
 
-  #virtualisation.virtualbox.host.enable = true;
-  #virtualisation.virtualbox.host.enableExtensionPack = true;
-  #virtualisation.virtualbox.guest.enable = true;
-  #virtualisation.virtualbox.guest.dragAndDrop = true;
+  services.greetd = {
+    enable = true;
+    settings = {
+      initial_session = {
+        user = "juvi";
+        command = "${pkgs.niri}/bin/niri --session"; 
+      };
+      default_session = {
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd ${pkgs.niri}/bin/niri";
+        user = "greeter";
+      };
+    };
+  };
+  
+  security.pam.services.hyprlock = {};
 
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
@@ -164,12 +175,6 @@
 
   virtualisation.docker.enable = true;
 
-  #environment.sessionVariables = {
-  #  MESA_LOADER_DRIVER_OVERRIDE = "i965";
-  #};
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     comma
     neovim
@@ -179,6 +184,8 @@
     ntfs3g
     wireshark
   ];
+
+  programs.niri.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -229,6 +236,6 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "26.05"; # Did you read the comment?
 }
 

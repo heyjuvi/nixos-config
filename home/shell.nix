@@ -31,10 +31,6 @@
       enableZshIntegration = true;
       enableFishIntegration = true;
     };
-    font = {
-      name = "Maple Mono";
-      size = 12.0;
-    };
     settings = {
       bold_font        = "auto";
       italic_font      = "auto";
@@ -46,16 +42,25 @@
       tab_bar_style = "slant";
       hide_window_decorations = true;
       window_margin_width = 10;
-      background_opacity = "0.8";
-      background_blur = 0;
+      background_blur = 1;
       notify_on_cmd_finish = "invisible";
       cursor_trail = 1;
     };
   };
 
+  stylix.targets.kitty = {
+    fonts.override = {
+      package = pkgs.fira-code;
+      name = "Maple Mono";
+      size = 12.0;
+    };
+  };
+
+  stylix.opacity.terminal = 0.6;
+
   programs.zsh = {
     enable = true;
-    initExtra = ''
+    initContent = ''
       eval "$(starship init zsh)"
     '';
   };

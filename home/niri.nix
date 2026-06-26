@@ -6,6 +6,8 @@
   ...
 }:
 {
+  stylix.targets.hyprlock.enable = false;
+
   home.file.".config/hypr/pfp.png".source = assets/epq-enby-trans.png;
 
   programs.hyprlock = {
@@ -22,7 +24,7 @@
           # path = "~/.config/hypr/bg.png";
           path = "screenshot";
           blur_passes = 3;
-          blur_size = 8;
+          blur_size = 12;
           # color = "rgb(0e1419)";
         }
       ];
@@ -226,7 +228,7 @@
         }
         {
           matches = [ { app-id = "^kitty$"; is-focused = true; } ];
-          opacity = 0.9;
+          opacity = 0.8;
         }
         {
           matches = [ { app-id = "^kitty$"; is-focused = false; } ];
@@ -234,6 +236,7 @@
         }
       ];
       spawn-at-startup = [
+        { command = [ "hyprlock" ]; }
         { command = [ "gnome-keyring-daemon" ]; }
         {
           command = [
@@ -245,6 +248,11 @@
           ];
         }	
         { command = [ "xwayland-satellite" ]; }
+        { command = [ "firefox" ]; }
+        { command = [ "Telegram" ]; }
+        { command = [ "signal-desktop" ]; }
+        { command = [ "discord" ]; }
+        { command = [ "element-desktop" ]; }
       ];
       environment = {
         DISPLAY = ":0";

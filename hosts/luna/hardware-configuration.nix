@@ -10,6 +10,10 @@
 
   boot.initrd.availableKernelModules = [ "ehci_pci" "ata_piix" "usb_storage" "sd_mod" "sr_mod" "sdhci_pci" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.kernelParams = [ 
+    "quiet" 
+    "splash" 
+  ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 

@@ -19,10 +19,11 @@
       url = "github:epireyn/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    #niri-pkgs = {
-    #  url = "github:sodiboo/niri-flake";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";

@@ -3,7 +3,10 @@
   imports =
     [
       ./shell.nix
+      ./stylix.nix
+      ./theme.nix
       ./niri.nix
+      ./git.nix
     ];
 
   home.username = "juvi";
@@ -11,7 +14,6 @@
   
   home.packages = with pkgs;
    [
-      niri
       xwayland-satellite
       swaybg
       firefox
@@ -30,7 +32,7 @@
       sway-contrib.grimshot
       neovide
       openvpn
-      swww
+      awww
       brightnessctl
       discord
       inkscape
@@ -130,25 +132,6 @@
       rust-analyzer
     ];
 
-  programs.git = {
-    enable = true;
-    userName = "linn";
-    userEmail = "linn@ha.si";
-
-    aliases = {
-      alias = "!git config --get-regexp alias | sed 's/alias\\.\\([^ ]*\\) /\\1 := /'";
-      graph = "log --graph --decorate --oneline";
-      map = "!git graph --all";
-      watch = "!watch -ct 'git -c color.status=always status -s && echo && git map --color'";
-    };
-
-    extraConfig = {
-      pull.rebase = true;
-      init.defaultBranch = "main";
-      fetch.prune = true;
-    };
-  };
-
   programs.home-manager.enable = true;
 
   home.sessionVariables = {
@@ -158,40 +141,5 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  dconf.enable = true;
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-    };
-  };
-
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Catppuccin-Mocha-Compact-Pink-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        accents = [ "pink" ];
-        size = "compact";
-        tweaks = [ "rimless" ];
-      };
-    };
-  };
-
-  home.pointerCursor =
-    let
-      chooseCursor = name: {
-        gtk.enable = true;
-        x11.enable = true;
-        name = name;
-        package = pkgs.runCommand "cursorTheme" {} ''
-          mkdir -p $out/share/icons
-          cp -r ${./assets/cursors}/${name} $out/share/icons/${name}
-        '';
-      };
-    in
-      chooseCursor "plan9";
-
-  #home.sessionVariables.DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
-
-  home.stateVersion = "23.11";
+  home.stateVersion = "26.05";
 }
