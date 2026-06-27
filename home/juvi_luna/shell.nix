@@ -50,13 +50,12 @@
 
   stylix.targets.kitty = {
     fonts.override = {
-      package = pkgs.fira-code;
       name = "Maple Mono";
-      size = 12.0;
+      size = 14.0;
     };
   };
 
-  stylix.opacity.terminal = 0.6;
+  stylix.opacity.terminal = 0.9;
 
   programs.zsh = {
     enable = true;

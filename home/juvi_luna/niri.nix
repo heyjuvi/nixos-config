@@ -228,7 +228,7 @@
         }
         {
           matches = [ { app-id = "^kitty$"; is-focused = true; } ];
-          opacity = 0.8;
+          opacity = 0.98;
         }
         {
           matches = [ { app-id = "^kitty$"; is-focused = false; } ];
@@ -294,16 +294,16 @@
           enable = true;
           width = 0;
           active.gradient = {
-            angle = 45;
+            angle = 0;
             from = "oklch(0.8025 0.1203 226.51)";
             to = "oklch(0.8118 0.0912 6.32)";
-            in' = "oklch longer hue";
+            in' = "oklch shorter hue";
           };
           inactive.gradient = {
-            angle = 45;
-            from = "oklch(0.8025 0.1203 226.51 / 40%)";
-            to = "oklch(0.8118 0.0912 6.32 / 40%)";
-            in' = "oklch longer hue";
+            angle = 0;
+            from = "oklch(0.8025 0.1203 226.51 / 20%)";
+            to = "oklch(0.8118 0.0912 6.32 / 20%)";
+            in' = "oklch shorter hue";
           };
         };
         preset-column-widths = [
@@ -351,7 +351,8 @@
         {
           "Mod+Shift+X".action.quit.skip-confirmation = false;
           "Mod+Return".action.spawn = "kitty";
-          "Mod+Backspace".action = actions.spawn "rofi" "-show" "drun";
+          #"Mod+Backspace".action = actions.spawn "rofi" "-show" "drun";
+          "Mod+Backspace".action = actions.spawn "noctalia-launcher";
           "Mod+Shift+Backspace".action = actions.spawn "rofi" "-show" "run";
           "Mod+Shift+Q".action = actions.close-window;
           "Mod+F11".action = actions.maximize-column;

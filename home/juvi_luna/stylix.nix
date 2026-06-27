@@ -8,11 +8,13 @@
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
     polarity = "dark";
-    fonts.sizes.applications = 10;
+    fonts.sizes.applications = 12;
     targets = {
       firefox = {
+        profileNames = [ "juvi" ];
         colorTheme.enable = true;
       };
+      gtk.enable = true;
     };
   };
 }

@@ -6,6 +6,7 @@
       ./stylix.nix
       ./theme.nix
       ./niri.nix
+      ./firefox.nix
       ./git.nix
     ];
 

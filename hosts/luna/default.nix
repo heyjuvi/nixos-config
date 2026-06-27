@@ -13,7 +13,11 @@
       inputs.niri.nixosModules.niri
     ];
 
-  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+  nixpkgs.overlays =
+    [
+      inputs.niri.overlays.niri
+      inputs.firefox-addons.overlays.default
+    ];
 
   nix.settings.experimental-features =
     [
@@ -80,6 +84,9 @@
   };
 
   services.displayManager.defaultSession = "niri";
+
+  services.upower.enable = true;
+  services.power-profiles-daemon.enable = true;
 
   # Printing
   services.printing = {
